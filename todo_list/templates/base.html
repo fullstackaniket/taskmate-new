@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS only -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">{% block title %}
+   {% endblock title %}
+
+
+  <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/logo.jpg' %}" alt="Logo" title="taskmate"
+          width="20px" height="20px"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link " href="{% url 'index' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'todolist' %}">Todolist</a>
+          <a class="nav-item nav-link" href="{% url 'contact' %}">Contact Us</a>
+          <a class="nav-item nav-link" href="{% url 'about' %}">About Us</a> 
+        </div>
+      </div>
+    {% if user.is_authenticated %}
+       <div class="form-inline my-2 my-lg-0">
+        <div class="p-2 bg-dark text-white">logged in as {{user.username}}</div>
+        <a href="{% url 'logout'%}">
+      <button class="btn btn-info my-2 my-sm-0" type="submit">Logout</button>
+      </a>
+    </div>
+   
+    {% else %}
+    
+       <a href="{% url 'register'%}">
+      <button class="btn btn-primary my-2 my-sm-0" type="submit">Register</button>
+      </a>
+      <a href="{% url 'login'%}">
+      <button class="btn btn-success" type="submit">Login</button>
+      </a>
+      </ul>
+    {% endif%}
+    </div>
+  </nav>
+</head>
+<body  class="bg-light">
+  {% block content %}
+
+
+  {% endblock content %}
+
+
+
+</body>
+
+</html>
